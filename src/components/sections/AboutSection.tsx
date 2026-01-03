@@ -1,97 +1,77 @@
-import { Target, Eye, CheckCircle2 } from "lucide-react";
-import aboutBg from "@/assets/about-company.jpg";
+import { Archive, BarChart2, Briefcase } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 export const AboutSection = () => {
   const { isRTL } = useLanguage();
 
-  const keyPoints = [
-    "Fully Licensed & Insured in KSA",
-    "ISO Certified Quality Management",
-    "Compliance with Saudi Labor Laws",
-    "Dedicated Safety Officers",
+  const features = [
+    {
+      icon: BarChart2,
+      title: "Data-Driven Planning",
+      desc: "Utilizing advanced analytics to optimize project timelines and resource allocation."
+    },
+    {
+      icon: Briefcase,
+      title: "Corporate Excellence",
+      desc: "Adhering to the highest standards of corporate governance and operational transparency."
+    },
+    {
+      icon: Archive,
+      title: "Rich Portfolio",
+      desc: "A diverse history of successful projects across residential, commercial, and industrial sectors."
+    }
   ];
 
   return (
-    <section id="about" className="section-padding bg-background relative overflow-hidden">
-      <div className="container-section text-left">
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            About Al-Itqan Al-Maha
-          </span>
-          <h2 className="heading-lg text-foreground mb-6">
-            Pioneering Excellence in <span className="text-primary">General Contracting</span>
-          </h2>
-          <p className="text-body text-lg leading-relaxed">
-            A leader in Saudi Arabia's construction and workforce sector, committed to delivering precision, quality, and reliability for every project.
-          </p>
-        </div>
+    <section className="py-16 bg-white sm:py-24 lg:py-32 border-b border-gray-100" id="about">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          {/* Text Content */}
+          <div className={`${isRTL ? "lg:order-2" : ""}`}>
+            <FadeIn direction="right">
+              <span className="text-gray-500 font-pj font-bold tracking-widest text-sm uppercase">About Us</span>
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl font-pj">
+                Pioneering Excellence in Construction
+              </h2>
+              <p className="mt-4 text-lg text-gray-600 font-inter">
+                Al-Itqan Al-Maha is a premier general contracting firm dedicated to shaping the skyline of Saudi Arabia. With a commitment to quality and innovation, we turn visionary concepts into tangible reality.
+              </p>
 
-        {/* Content Grid */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${isRTL ? "lg:grid-flow-dense" : ""}`}>
-          {/* Image */}
-          <div className={`relative ${isRTL ? "lg:col-start-2" : ""}`}>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={aboutBg}
-                alt="Al-Itqan Al-Maha headquarters in Saudi Arabia"
-                className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-              {/* Overlay Content */}
-              <div className="absolute bottom-8 left-8 right-8 text-white">
-                <div className="flex items-center gap-4">
-                  <div className="bg-accent text-white px-4 py-2 font-bold text-2xl rounded-lg">#1</div>
-                  <div>
-                    <div className="font-bold text-lg">Choice for Mega Projects</div>
-                    <div className="text-white/80 text-sm">Trusted by Industry Leaders</div>
-                  </div>
-                </div>
+              <div className="mt-8 space-y-6">
+                {features.map((feature, index) => {
+                  const Icon = feature.icon;
+                  return (
+                    <FadeIn key={index} delay={0.1 * index} direction="up">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-50 text-gray-900 border border-gray-100">
+                            <Icon className="w-6 h-6" />
+                          </div>
+                        </div>
+                        <div className="ml-4">
+                          <h3 className="text-xl font-bold text-gray-900 font-pj">{feature.title}</h3>
+                          <p className="mt-2 text-base text-gray-600 font-inter">{feature.desc}</p>
+                        </div>
+                      </div>
+                    </FadeIn>
+                  );
+                })}
               </div>
-            </div>
+            </FadeIn>
           </div>
 
-          {/* Text Content */}
-          <div className={`space-y-8 ${isRTL ? "lg:col-start-1 text-right" : ""}`}>
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                Building the Future of KSA
-              </h3>
-              <p className="text-muted-foreground leading-relaxed mb-4 text-lg">
-                For over a decade, Al-Itqan Al-Maha has been at the forefront of the Kingdom's infrastructure development. We specialize in providing skilled workforce solutions and general contracting services that drive project success.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Our deep understanding of local market dynamics, combined with international standards of operation, makes us the preferred partner for complex construction and industrial projects across Saudi Arabia.
-              </p>
-            </div>
-
-            {/* Key Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {keyPoints.map((item) => (
-                <div key={item} className={`flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
-                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-green-600" />
-                  </div>
-                  <span className="text-foreground font-medium">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Vision & Mission Cards - Simplified */}
-            <div className="grid sm:grid-cols-2 gap-6 pt-6">
-              <div className="p-6 rounded-xl bg-secondary/30 border border-border">
-                <Eye className="w-8 h-8 text-primary mb-4" />
-                <h4 className="font-bold mb-2">Our Vision</h4>
-                <p className="text-sm text-muted-foreground">To be the undisputed leader in KSA's contracting sector, recognized for innovation and integrity.</p>
+          {/* Image */}
+          <div className={`${isRTL ? "lg:order-1" : ""}`}>
+            <FadeIn direction="left">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[600px] shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1590644365607-1c5a38fcac27?q=80&w=1000&auto=format&fit=crop"
+                  alt="Modern architecture"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
               </div>
-              <div className="p-6 rounded-xl bg-secondary/30 border border-border">
-                <Target className="w-8 h-8 text-primary mb-4" />
-                <h4 className="font-bold mb-2">Our Mission</h4>
-                <p className="text-sm text-muted-foreground">Empowering projects with top-tier talent and uncompromising quality standards.</p>
-              </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </div>

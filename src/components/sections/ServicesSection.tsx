@@ -1,78 +1,94 @@
-import { ArrowRight, Wrench, HardHat, Building2, Truck, Users, Settings, Award, Clock } from "lucide-react";
+import { Wrench, HardHat, Building, PaintBucket, Hammer, Truck } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 export const ServicesSection = () => {
-  const { t, isRTL } = useLanguage();
-
   const services = [
     {
-      title: "General Labor Staffing",
-      description: "Reliable, vetted general workforce for construction, industrial, and logistics sectors across Saudi Arabia.",
-      icon: <Users className="w-6 h-6" />,
-      link: "/services/labor-staffing",
-      features: ["Vetted Workforce", "Immediate Deployment", "Compliance Assured"]
+      title: "General Contracting",
+      desc: "Comprehensive construction services for residential, commercial, and industrial projects.",
+      icon: Building,
+      link: "/services/general-contracting"
     },
     {
-      title: "Skilled Manpower Supply",
-      description: "Certified technicians, electricians, plumbers, and specialized tradesmen ready for complex projects.",
-      icon: <Settings className="w-6 h-6" />,
-      link: "/services/skilled-manpower",
-      features: ["Certified Experts", "Technical Proficiency", "Safety Trained"]
+      title: "Manpower Supply",
+      desc: "Providing skilled, semi-skilled, and unskilled labor for various project needs.",
+      icon: HardHat,
+      link: "/services/manpower-supply"
     },
     {
-      title: "Industrial & Manufacturing",
-      description: "Operatives and machine handlers for high-volume production and industrial facility maintenance.",
-      icon: <Building2 className="w-6 h-6" />,
-      link: "/services/industrial",
-      features: ["Production Efficiency", "Process Optimized", "Flexible Shifts"]
+      title: "Equipment Rental",
+      desc: "Leasing of heavy machinery and construction equipment for site operations.",
+      icon: Truck,
+      link: "/services/equipment-rental"
     },
     {
-      title: "Event Staff & Support",
-      description: "Professional support staff for large-scale corporate events, exhibitions, and public gatherings in KSA.",
-      icon: <Clock className="w-6 h-6" />,
-      link: "/services/event-staff",
-      features: ["Professional Presentation", "Multilingual Support", "Guest Focused"]
+      title: "Civil Works",
+      desc: "Excavation, grading, and infrastructure development services.",
+      icon: Hammer,
+      link: "/services/civil-works"
+    },
+    {
+      title: "Finishing Works",
+      desc: "High-quality interior and exterior finishing, including painting and tiling.",
+      icon: PaintBucket,
+      link: "/services/finishing-works"
+    },
+    {
+      title: "Maintenance",
+      desc: "Routine and emergency maintenance services for facilities and structures.",
+      icon: Wrench,
+      link: "/services/maintenance"
     },
   ];
 
   return (
-    <section className="section-padding bg-secondary/30" id="services">
-      <div className="container-section">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-accent font-semibold tracking-wider text-xs uppercase bg-accent/10 px-3 py-1 rounded-full">Our Expertise</span>
-          <h2 className="heading-lg text-foreground">Comprehensive Solutions</h2>
-          <p className="text-body">
-            Tailored construction and contracting services designed to meet international standards and local requirements in Saudi Arabia.
-          </p>
+    <section className="py-16 bg-gray-50 sm:py-24 lg:py-32 border-b border-gray-100" id="services">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
+          <FadeIn>
+            <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl font-pj">
+              Comprehensive Contracting Solutions
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 font-inter">
+              We provide an extensive range of specialized services tailored to meet the rigorous demands of the Saudi construction market.
+            </p>
+          </FadeIn>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="group bg-card p-6 rounded-2xl border border-border hover:border-accent/40 hover:shadow-lg transition-all duration-300 flex flex-col"
-            >
-              <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                {service.icon}
-              </div>
-
-              <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
-                {service.description}
-              </p>
-
-              <div className="pt-4 border-t border-border mt-auto">
-                <Link
-                  to={service.link}
-                  className={`inline-flex items-center text-sm font-semibold text-primary hover:text-accent transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div
+                  className="group relative p-8 bg-white rounded-xl border border-gray-100 hover:shadow-lg transition-all duration-300 h-full flex flex-col"
                 >
-                  {isRTL ? "اقرأ المزيد" : "Learn more"}
-                  <ArrowRight className={`w-4 h-4 ml-1 transition-transform group-hover:translate-x-1 ${isRTL ? "rotate-180 mr-1 ml-0 group-hover:-translate-x-1" : ""}`} />
-                </Link>
-              </div>
-            </div>
-          ))}
+                  <div className="w-12 h-12 rounded-lg bg-gray-50 flex items-center justify-center mb-6 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300">
+                    <Icon className="w-6 h-6" />
+                  </div>
+
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 font-pj group-hover:text-gray-600 transition-colors">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-gray-600 mb-6 flex-grow font-inter leading-relaxed">
+                    {service.desc}
+                  </p>
+
+                  <Link
+                    to={service.link}
+                    className="inline-flex items-center text-sm font-bold text-gray-900 hover:text-gray-600 transition-colors mt-auto font-pj"
+                  >
+                    Learn more
+                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
